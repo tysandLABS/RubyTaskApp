@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 
 
 #Set variable: SECRET_KEY_BASE=
