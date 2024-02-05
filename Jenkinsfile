@@ -7,9 +7,9 @@ pipeline {
      
     stage ('Build') {
       steps {
-          sh 'cp /home/ubuntu/prod/Dockerfile . && cp myserver.crt . && cp myserver.key . && docker build -t tsanderson77/tasks_app:v2 .'
-    }
-}
+          sh 'cp /home/ubuntu/prod/Dockerfile . && cp /home/ubuntu/prod/myserver.crt . && cp /home/ubuntu/prod/myserver.key . && docker build -t tsanderson77/tasks_app:v2 .'
+    }           
+  }
      stage ('Login') {
         steps {
           sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
