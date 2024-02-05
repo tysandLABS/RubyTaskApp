@@ -1,7 +1,26 @@
 pipeline {
   agent {label 'awsDeploy2'}
+     environment{
+      DOCKERHUB_CREDENTIALS = credentials('tsanderson77-dockerhub')
+      }
    stages {
+     
+    stage ('Build') {
+      steps {
+          sh 'docker build -t tsanderson77/tasks_app:v1 . && docker scout quickview && docker scout recommendations local://tsanderson77/tasks_app:v1'
+    }
+}
+     stage ('Login') {
+        steps {
+          sh 'echo $DOCKERHUB_CREDENTIALS_PSW | docker login -u $DOCKERHUB_CREDENTIALS_USR --password-stdin'
+      }
+}
 
+     stage ('Push') {
+        steps {
+            sh 'docker push tsanderson77/tasks_app:v1 && docker image rm tsanderson77/tasks_app:v1 && docker system prune -f'
+  }
+     }
      stage('Init') {
        agent {label 'awsDeploy'}
        steps {
