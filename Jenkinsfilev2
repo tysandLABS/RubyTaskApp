@@ -6,7 +6,7 @@ pipeline {
      
     stage ('Loading new task') {
       steps {
-          sh 'aws ecs register-task-definition --family ruby-task3 --container-definitions container-definition.json
+          sh 'aws ecs register-task-definition --family ruby-task3 --container-definitions ruby-definition.json
 '
     }
 }
