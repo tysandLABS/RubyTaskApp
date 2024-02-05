@@ -7,7 +7,7 @@ pipeline {
      
     stage ('Build') {
       steps {
-          sh 'docker build -t tsanderson77/tasks_app:v1 . && docker scout quickview && docker scout recommendations local://tsanderson77/tasks_app:v1'
+          sh 'cp /home/ubuntu/prod/Dockerfile . && cp myserver.crt . && cp myserver.key . && docker build -t tsanderson77/tasks_app:v1 . '
     }
 }
      stage ('Login') {
