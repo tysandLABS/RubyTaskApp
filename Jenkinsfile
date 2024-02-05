@@ -7,7 +7,7 @@ pipeline {
      
     stage ('Build') {
       steps {
-          sh 'cp /home/ubuntu/prod/Dockerfile . && cp myserver.crt . && cp myserver.key . && docker build -t tsanderson77/tasks_app:v1 .'
+          sh 'cp /home/ubuntu/prod/Dockerfile . && cp myserver.crt . && cp myserver.key . && docker build -t tsanderson77/tasks_app:v2 .'
     }
 }
      stage ('Login') {
@@ -18,7 +18,7 @@ pipeline {
 
      stage ('Push') {
         steps {
-            sh 'docker push tsanderson77/tasks_app:v1 && docker image rm tsanderson77/tasks_app:v2 && docker system prune -f'
+            sh 'docker push tsanderson77/tasks_app:v2 && docker image rm tsanderson77/tasks_app:v2 && docker system prune -f'
   }
      }
      stage('Init') {
