@@ -1,1 +1,17 @@
 
+pipeline {
+  agent {label 'awsDeploy2'}
+    
+   stages {
+     
+    stage ('Loading new task') {
+      steps {
+          sh 'aws ecs register-task-definition --family ruby-task3 --container-definitions container-definition.json
+'
+    }
+}
+     stage ('Switch to green') {
+        steps {
+          sh 'aws elbv2 modify-listener --listener-arn arn:aws:elasticloadbalancing:us-east-1:266686430719:listener/app/ruby-lb/34478145b24d2d1c/3f6aa37d3240afb7 --default-actions Type=forward,TargetGroupArn=arn:aws:elasticloadbalancing:us-east-1:266686430719:targetgroup/blue-app/ecdaa995c90f5774'
+      }
+}
