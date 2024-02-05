@@ -118,8 +118,8 @@ resource "aws_ecs_service" "blue-ecs-service" {
 
 }
 
-resource "aws_ecs_service" "green-ecs-service2" {
-  name                 = "green-ecs-service2"
+resource "aws_ecs_service" "green-ecs-service" {
+  name                 = "green-ecs-service"
   cluster              = aws_ecs_cluster.aws-ecs-cluster.id
   task_definition      = aws_ecs_task_definition.aws-ecs-task2.arn
   launch_type          = "FARGATE"
@@ -138,7 +138,7 @@ resource "aws_ecs_service" "green-ecs-service2" {
 
   load_balancer {
     target_group_arn = aws_lb_target_group.green-app2.arn
-    container_name   = "ruby-green-container-2"
+    container_name   = "ruby-green-container-1"
     container_port   = 3000
   }
 
